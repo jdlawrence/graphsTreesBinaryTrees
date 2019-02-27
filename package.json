@@ -1,0 +1,18 @@
+{
+  "name": "graphExercises",
+  "version": "1.0.0",
+  "main": "graphs.js",
+  "repository": "https://github.com/jdlawrence/graphExercises.git",
+  "author": "Jamil Lawrence <jamil.lawrence@gmail.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-jest": "^24.1.0",
+    "jest": "^24.1.0"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
