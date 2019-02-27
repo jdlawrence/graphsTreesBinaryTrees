@@ -1,6 +1,6 @@
-class graph {
+class Graph {
   constructor() {
-
+    this.nodes = {};
   }
 
   addNode(node) {
@@ -8,8 +8,4 @@ class graph {
   }
 }
 
-export default graph;
-// function sum(a, b) {
-//   return a + b;
-// }
-// module.exports = sum;
+export default Graph;

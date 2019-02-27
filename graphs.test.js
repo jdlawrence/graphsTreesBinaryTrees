@@ -1,14 +1,21 @@
-import graph from './graphs';
+import Graph from './graphs';
 
-console.log('graph', graph);
+let graph;
 
-test('adds 1 + 2 to equal 3', () => {
-  const graphInstance = new graph();
-  expect(graphInstance.addNode()).toBe(3);
+beforeEach(() => {
+  graph = new Graph();
 });
 
-// const sum = require('./graphs');
+test('it should be a function', () => {
+  expect(typeof Graph).toBe('function');
+});
 
-// test('adds 1 + 2 to equal 3', () => {
-//   expect(sum(1, 2)).toBe(3);
-// });
+describe('the addNode function', () => {
+  test('should be a function', () => {
+    expect(typeof graph.addNode).toBe('function');
+  });
+
+  test('should return a dummy value', () => {
+    expect(graph.addNode()).toBe(5);
+  });
+});
