@@ -15,7 +15,8 @@ describe('the addNode function', () => {
     expect(typeof graph.addNode).toBe('function');
   });
 
-  test('should return a dummy value', () => {
-    expect(graph.addNode()).toBe(5);
+  test('Should add a new node to nodes array', () => {
+    graph.addNode(2);
+    expect(graph.nodes.indexOf(2) > -1).toBe(true);
   });
 });

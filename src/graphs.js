@@ -8,9 +8,10 @@ class Graph {
     this.nodes.push(node);
     this.edges[node] = [];
   }
+
+  removeNode(node) {
+    // TODO
+  }
 }
 
-let jamil = new Graph();
-jamil.addNode('akeem');
-console.log('jamil', jamil);
 export default Graph;
