@@ -32,6 +32,30 @@ class Graph {
 
     return false;
   }
+
+  depthFirstTraversal(startingNode) {
+    let result = [];
+    let nodeStack = [];
+    let visitedArr = [];
+
+    nodeStack.push(startingNode);
+    visitedArr[startingNode] = true;
+    result.push(startingNode);
+
+    while (nodeStack.length) {
+      const current = nodeStack.pop();
+      const neighbors = this.adjList[current];
+
+      neighbors.forEach(neighbor => {
+        if (!visitedArr[neighbor]) {
+          nodeStack.push(neighbor);
+          result.push(neighbor);
+          visitedArr[neighbor] = true;
+        }
+      });
+    }
+    return result;
+  }
 }
 
 let jamil = new Graph();
@@ -39,21 +63,19 @@ jamil.addNode(1);
 jamil.addNode(2);
 jamil.addNode(3);
 jamil.addNode(4);
-jamil.addNode(5);
+jamil.addNode(6);
+jamil.addNode(7);
 jamil.addEdge(1, 2);
-jamil.addEdge(1, 3);
 jamil.addEdge(1, 4);
-jamil.addEdge(1, 5);
-jamil.addEdge(2, 3);
-jamil.addEdge(2, 4);
-jamil.addEdge(2, 5);
+jamil.addEdge(1, 7);
 jamil.addEdge(3, 4);
-jamil.addEdge(3, 5);
-jamil.addEdge(4, 5);
+jamil.addEdge(3, 6);
+jamil.addEdge(4, 6);
 
 console.log('before delete', jamil);
-jamil.removeNode(3);
-console.log('after delete', jamil);
-jamil.addNode(3);
+console.log('DFS', jamil.depthFirstTraversal(1));
+// jamil.removeNode(3);
+// console.log('after delete', jamil);
+// jamil.addNode(3);
 
 export default Graph;
