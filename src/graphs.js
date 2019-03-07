@@ -78,8 +78,36 @@ jamil.addEdge(6, 8);
 jamil.addEdge(6, 9);
 jamil.addEdge(99, 4);
 
+let akeem = new Graph();
+akeem.addNode(1);
+akeem.addNode(2);
+akeem.addNode(3);
+akeem.addNode(4);
+akeem.addNode(5);
+akeem.addNode(6);
+akeem.addEdge(1, 2);
+akeem.addEdge(1, 3);
+akeem.addEdge(3, 4);
+akeem.addEdge(4, 5);
+akeem.addEdge(5, 6);
+
+let kyle = new Graph();
+kyle.addNode(1);
+kyle.addNode(2);
+kyle.addNode(3);
+kyle.addNode(4);
+kyle.addNode(5);
+kyle.addNode(6);
+kyle.addEdge(1, 3);
+kyle.addEdge(1, 2);
+kyle.addEdge(3, 4);
+kyle.addEdge(4, 5);
+kyle.addEdge(5, 6);
+
 console.log('before delete', jamil);
-console.log('DFS', jamil.depthFirstTraversal(1));
+console.log('DFS jamil', jamil.depthFirstTraversal(1));
+console.log('DFS akeem', akeem.depthFirstTraversal(1));
+console.log('DFS kyle', kyle.depthFirstTraversal(1));
 // jamil.removeNode(3);
 // console.log('after delete', jamil);
 // jamil.addNode(3);
