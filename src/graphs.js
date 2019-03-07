@@ -40,16 +40,15 @@ class Graph {
 
     nodeStack.push(startingNode);
     visitedArr[startingNode] = true;
-    result.push(startingNode);
 
     while (nodeStack.length) {
       const current = nodeStack.pop();
       const neighbors = this.adjList[current];
+      result.push(current);
 
       neighbors.forEach(neighbor => {
         if (!visitedArr[neighbor]) {
           nodeStack.push(neighbor);
-          result.push(neighbor);
           visitedArr[neighbor] = true;
         }
       });
