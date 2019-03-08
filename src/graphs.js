@@ -55,6 +55,30 @@ class Graph {
     }
     return result;
   }
+
+  breadthFirstTraversal(startingNode) {
+    let result = [];
+    let nodeStack = [];
+    let visitedArr = [];
+
+    nodeStack.push(startingNode);
+    visitedArr[startingNode] = true;
+
+    while (nodeStack.length) {
+      const current = nodeStack.shift();
+      const neighbors = this.adjList[current];
+      result.push(current);
+
+      neighbors.forEach(neighbor => {
+        if (!visitedArr[neighbor]) {
+          nodeStack.push(neighbor);
+          visitedArr[neighbor] = true;
+        }
+      });
+    }
+    return result;
+
+  }
 }
 
 let jamil = new Graph();
@@ -85,29 +109,22 @@ akeem.addNode(3);
 akeem.addNode(4);
 akeem.addNode(5);
 akeem.addNode(6);
+akeem.addNode(7);
+akeem.addNode(8);
+akeem.addNode(9);
+
 akeem.addEdge(1, 2);
-akeem.addEdge(1, 3);
+akeem.addEdge(2, 3);
 akeem.addEdge(3, 4);
 akeem.addEdge(4, 5);
-akeem.addEdge(5, 6);
-
-let kyle = new Graph();
-kyle.addNode(1);
-kyle.addNode(2);
-kyle.addNode(3);
-kyle.addNode(4);
-kyle.addNode(5);
-kyle.addNode(6);
-kyle.addEdge(1, 3);
-kyle.addEdge(1, 2);
-kyle.addEdge(3, 4);
-kyle.addEdge(4, 5);
-kyle.addEdge(5, 6);
+akeem.addEdge(1, 6);
+akeem.addEdge(6, 7);
+akeem.addEdge(7, 8);
+akeem.addEdge(8, 9);
 
 console.log('before delete', jamil);
-console.log('DFS jamil', jamil.depthFirstTraversal(1));
-console.log('DFS akeem', akeem.depthFirstTraversal(1));
-console.log('DFS kyle', kyle.depthFirstTraversal(1));
+console.log('DFS', jamil.depthFirstTraversal(1));
+console.log('BFS', akeem.breadthFirstTraversal(1));
 // jamil.removeNode(3);
 // console.log('after delete', jamil);
 // jamil.addNode(3);
