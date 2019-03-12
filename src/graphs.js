@@ -34,6 +34,9 @@ class Graph {
   }
 
   depthFirstTraversal(startingNode) {
+    if (startingNode === undefined) {
+      return 'No starting node was provided';
+    }
     let result = [];
     let nodeStack = [];
     let visitedArr = [];

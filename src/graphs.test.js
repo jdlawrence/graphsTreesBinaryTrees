@@ -56,3 +56,42 @@ describe('the removeNode function', () => {
     expect(graph.adjList[2]).toBe(undefined);
   });
 });
+
+describe('the depth first traversal function', () => {
+  beforeEach(() => {
+    graph.addNode(1);
+    graph.addNode(2);
+    graph.addNode(3);
+    graph.addNode(4);
+    graph.addNode(5);
+    graph.addEdge(1, 2);
+    graph.addEdge(2, 3);
+    graph.addEdge(1, 3);
+    graph.addEdge(3, 4);
+    graph.addEdge(4, 5);
+  });
+
+  afterEach(() => {
+    graph = new Graph();
+  });
+
+  test('should be a function', () => {
+    expect(typeof graph.depthFirstTraversal).toBe('function');
+  });
+
+  test('should return a warning when a starting node is not provided', () => {
+    expect(graph.depthFirstTraversal()).toEqual('No starting node was provided');
+  });
+
+  test('should return an array', () => {
+    expect(Array.isArray(graph.depthFirstTraversal(1))).toBe(true);
+  });
+
+  test('should return nodes on opposite ends in a nonsecutive order', () => {
+    const nodeOnOneEnd = graph.depthFirstTraversal(1).indexOf(3);
+    const nodeOnOtherEnd = graph.depthFirstTraversal(1).indexOf(5);
+    const distance = Math.abs(nodeOnOneEnd - nodeOnOtherEnd);
+
+    expect(distance).toBeGreaterThanOrEqual(2);
+  });
+});
