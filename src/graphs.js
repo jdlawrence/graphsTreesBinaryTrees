@@ -33,6 +33,20 @@ class Graph {
     return false;
   }
 
+  removeEdge(node1, node2) {
+    const indexOfNode2 = this.adjList[node1] && this.adjList[node1].indexOf(node2);
+    const indexOfNode1 = this.adjList[node2] && this.adjList[node2].indexOf(node1);
+
+    const badIndices = this.adjList[node1] === undefined || this.adjList[node2] === undefined;
+
+    if (badIndices) {
+      return 'Please pass in valid indices';
+    } else {
+      this.adjList[node1].splice(indexOfNode2, 1);
+      this.adjList[node2].splice(indexOfNode1, 1);
+    }
+  }
+
   depthFirstTraversal(startingNode) {
     if (startingNode === undefined) {
       return 'No starting node was provided';
@@ -60,6 +74,10 @@ class Graph {
   }
 
   breadthFirstTraversal(startingNode) {
+    if (startingNode === undefined) {
+      return 'No starting node was provided';
+    }
+
     let result = [];
     let nodeStack = [];
     let visitedArr = [];
@@ -126,6 +144,8 @@ akeem.addEdge(7, 8);
 akeem.addEdge(8, 9);
 
 console.log('before delete', jamil);
+jamil.removeEdge(1, 8);
+console.log('after removal', jamil);
 console.log('DFS', jamil.depthFirstTraversal(1));
 console.log('BFS', akeem.breadthFirstTraversal(1));
 // jamil.removeNode(3);
