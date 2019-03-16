@@ -56,3 +56,31 @@ describe('the traverse function', () => {
     expect(logger.values.length).toBe(9);
   });
 });
+
+describe('the contains function', () => {
+  beforeEach(() => {
+    tree.insertChild(2);
+    tree.insertChild(3);
+    tree.insertChild(4);
+    tree.children[0].insertChild(2.1);
+    tree.children[0].insertChild(2.2);
+    tree.children[0].insertChild(2.3);
+    tree.children[0].children[1].insertChild(2.21);
+    tree.children[0].children[1].insertChild(2.22);
+  });
+
+  afterEach(() => {
+    tree = new Tree(1);
+  });
+
+  test('should be a function', () => {
+    expect(typeof tree.traverse).toBe('function');
+  });
+
+  test('should return true when the value is somewhere in the tree', () => {
+    expect(tree.contains(1)).toBe(true);
+    expect(tree.contains(2)).toBe(true);
+    expect(tree.contains(2.1)).toBe(true);
+    expect(tree.contains(2.21)).toBe(true);
+  });
+});

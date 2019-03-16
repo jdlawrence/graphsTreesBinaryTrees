@@ -15,6 +15,14 @@ class Tree {
       this.traverse(child, func);
     });
   }
+
+  contains(searchValue) {
+    let result = false;
+    this.traverse(this, (currentValue) => {
+      result = result || currentValue === searchValue;
+    });
+    return result;
+  }
 }
 
 const jamil = new Tree(1);
@@ -36,6 +44,11 @@ const logger = new Logger();
 jamil.children[0].insertChild(2.1);
 jamil.children[0].insertChild(2.2);
 jamil.children[0].insertChild(2.3);
+jamil.children[0].children[1].insertChild(2.21);
 jamil.traverse(jamil, logger.log);
-console.log('logger.values', logger.values);
+// console.log('logger.values', logger.values);
+console.log('contains 1', jamil.contains(1));
+console.log('contains 2', jamil.contains(2));
+console.log('contains 2.21', jamil.contains(2.21));
+console.log('contains 5', jamil.contains(5));
 export default Tree;
