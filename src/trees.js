@@ -7,10 +7,12 @@ class Tree {
     const newTree = new Tree(value);
     this.children.push(newTree);
   }
+
+  // Uses a Breadth-First Traversal
   traverse(tree, func = console.log) {
     func(tree.value);
     tree.children.forEach(child => {
-      this.traverse(child);
+      this.traverse(child, func);
     });
   }
 }
@@ -23,6 +25,7 @@ jamil.insertChild(4);
 class Logger {
   constructor() {
     this.values = [];
+    this.log = this.log.bind(this);
   }
   log(value) {
     this.values.push(value);
@@ -33,7 +36,6 @@ const logger = new Logger();
 jamil.children[0].insertChild(2.1);
 jamil.children[0].insertChild(2.2);
 jamil.children[0].insertChild(2.3);
-const result = [];
-jamil.traverse(jamil, logger.log.bind(logger));
-console.log(logger.values);
+jamil.traverse(jamil, logger.log);
+console.log('logger.values', logger.values);
 export default Tree;
