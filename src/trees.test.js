@@ -74,7 +74,7 @@ describe('the contains function', () => {
   });
 
   test('should be a function', () => {
-    expect(typeof tree.traverse).toBe('function');
+    expect(typeof tree.contains).toBe('function');
   });
 
   test('should return true when the value is somewhere in the tree', () => {
@@ -82,5 +82,28 @@ describe('the contains function', () => {
     expect(tree.contains(2)).toBe(true);
     expect(tree.contains(2.1)).toBe(true);
     expect(tree.contains(2.21)).toBe(true);
+  });
+
+  test('should return false when the value is not in the tree', () => {
+    expect(tree.contains(5)).toBe(false);
+  });
+});
+
+describe('the size function', () => {
+  afterEach(() => {
+    tree = new Tree(1);
+  });
+
+  test('should be a function', () => {
+    expect(typeof tree.contains).toBe('function');
+  });
+
+  test('should return a number equaling the size of the tree', () => {
+    expect(typeof tree.size(tree)).toBe('number');
+    expect(tree.size(tree)).toBe(1);
+    tree.insertChild(2);
+    expect(tree.size(tree)).toBe(2);
+    tree.children[0].insertChild(3);
+    expect(tree.size(tree)).toBe(3);
   });
 });

@@ -23,6 +23,14 @@ class Tree {
     });
     return result;
   }
+
+  size(tree) {
+    let size = 0;
+    this.traverse(tree, () => {
+      size++;
+    });
+    return size;
+  }
 }
 
 const jamil = new Tree(1);
@@ -45,10 +53,8 @@ jamil.children[0].insertChild(2.1);
 jamil.children[0].insertChild(2.2);
 jamil.children[0].insertChild(2.3);
 jamil.children[0].children[1].insertChild(2.21);
+jamil.children[0].children[1].insertChild(2.22);
 jamil.traverse(jamil, logger.log);
-// console.log('logger.values', logger.values);
-console.log('contains 1', jamil.contains(1));
-console.log('contains 2', jamil.contains(2));
-console.log('contains 2.21', jamil.contains(2.21));
-console.log('contains 5', jamil.contains(5));
+console.log('size tree', jamil.size(jamil));
+
 export default Tree;
