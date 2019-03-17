@@ -47,11 +47,10 @@ class Graph {
     }
   }
 
-  depthFirstTraversal(startingNode) {
+  depthFirstTraversal(startingNode, func = console.log) {
     if (startingNode === undefined) {
       return 'No starting node was provided';
     }
-    let result = [];
     let nodeStack = [];
     let visitedArr = [];
 
@@ -61,7 +60,7 @@ class Graph {
     while (nodeStack.length) {
       const current = nodeStack.pop();
       const neighbors = this.adjList[current];
-      result.push(current);
+      func(current);
 
       neighbors.forEach(neighbor => {
         if (!visitedArr[neighbor]) {
@@ -70,15 +69,13 @@ class Graph {
         }
       });
     }
-    return result;
   }
 
-  breadthFirstTraversal(startingNode) {
+  breadthFirstTraversal(startingNode, func = console.log) {
     if (startingNode === undefined) {
       return 'No starting node was provided';
     }
 
-    let result = [];
     let nodeStack = [];
     let visitedArr = [];
 
@@ -88,7 +85,7 @@ class Graph {
     while (nodeStack.length) {
       const current = nodeStack.shift();
       const neighbors = this.adjList[current];
-      result.push(current);
+      func(current);
 
       neighbors.forEach(neighbor => {
         if (!visitedArr[neighbor]) {
@@ -97,8 +94,6 @@ class Graph {
         }
       });
     }
-    return result;
-
   }
 }
 
@@ -143,11 +138,11 @@ akeem.addEdge(6, 7);
 akeem.addEdge(7, 8);
 akeem.addEdge(8, 9);
 
-console.log('before delete', jamil);
-jamil.removeEdge(1, 8);
-console.log('after removal', jamil);
-console.log('DFS', jamil.depthFirstTraversal(1));
-console.log('BFS', akeem.breadthFirstTraversal(1));
+// console.log('before delete', jamil);
+// jamil.removeEdge(1, 8);
+// console.log('after removal', jamil);
+// console.log('DFS', jamil.depthFirstTraversal(1));
+// console.log('BFS', akeem.breadthFirstTraversal(1));
 // jamil.removeNode(3);
 // console.log('after delete', jamil);
 // jamil.addNode(3);

@@ -1,6 +1,9 @@
 import Graph from './graphs';
+import Logger from './logger';
 
 let graph;
+let logger;
+
 beforeEach(() => {
   graph = new Graph();
 });
@@ -99,6 +102,8 @@ describe('the depth first traversal function', () => {
     graph.addEdge(1, 3);
     graph.addEdge(3, 4);
     graph.addEdge(4, 5);
+
+    logger = new Logger();
   });
 
   afterEach(() => {
@@ -113,13 +118,12 @@ describe('the depth first traversal function', () => {
     expect(graph.depthFirstTraversal()).toEqual('No starting node was provided');
   });
 
-  test('should return an array', () => {
-    expect(Array.isArray(graph.depthFirstTraversal(1))).toBe(true);
-  });
-
   test('should return nodes on opposite ends in a nonsecutive order', () => {
-    const nodeOnOneEnd = graph.depthFirstTraversal(1).indexOf(3);
-    const nodeOnOtherEnd = graph.depthFirstTraversal(1).indexOf(5);
+    // Do a depth first traversal and log the result the logger class to store the result
+    graph.depthFirstTraversal(1, logger.log);
+
+    const nodeOnOneEnd = logger.values.indexOf(3);
+    const nodeOnOtherEnd = logger.values.indexOf(5);
     const distance = Math.abs(nodeOnOneEnd - nodeOnOtherEnd);
 
     expect(distance).toBeGreaterThanOrEqual(2);
@@ -138,6 +142,8 @@ describe('the breadth first traversal function', () => {
     graph.addEdge(1, 3);
     graph.addEdge(3, 4);
     graph.addEdge(4, 5);
+
+    logger = new Logger();
   });
 
   afterEach(() => {
@@ -152,13 +158,12 @@ describe('the breadth first traversal function', () => {
     expect(graph.breadthFirstTraversal()).toEqual('No starting node was provided');
   });
 
-  test('should return an array', () => {
-    expect(Array.isArray(graph.breadthFirstTraversal(1))).toBe(true);
-  });
-
   test('should return nodes the same distance from starting consecutively', () => {
-    const nodeOnOneEnd = graph.depthFirstTraversal(1).indexOf(5);
-    const nodeOnOtherEnd = graph.depthFirstTraversal(1).indexOf(9);
+    // Do a depth first traversal and log the result the logger class to store the result
+    graph.depthFirstTraversal(1, logger.log);
+
+    const nodeOnOneEnd = logger.values.indexOf(3);
+    const nodeOnOtherEnd = logger.values.indexOf(5);
     const distance = Math.abs(nodeOnOneEnd - nodeOnOtherEnd);
 
     expect(distance).toBeGreaterThanOrEqual(1);
