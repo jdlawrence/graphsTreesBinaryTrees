@@ -6,30 +6,70 @@ class Tree {
   insertChild(value) {
     const newTree = new Tree(value);
     this.children.push(newTree);
+    return newTree;
   }
 
-  // Uses a Breadth-First Traversal
-  traverse(tree, func = console.log) {
-    func(tree.value);
+  // Uses a Depth-First Traversal
+  static traverse(tree, func = console.log) {
+    func(tree);
     tree.children.forEach(child => {
-      this.traverse(child, func);
+      Tree.traverse(child, func);
     });
   }
 
   contains(searchValue) {
     let result = false;
-    this.traverse(this, (currentValue) => {
-      result = result || currentValue === searchValue;
+    Tree.traverse(this, (leaf) => {
+      result = result || leaf.value === searchValue;
     });
     return result;
   }
 
-  size(tree) {
+  static size(tree) {
     let size = 0;
-    this.traverse(tree, () => {
+    Tree.traverse(tree, () => {
       size++;
     });
     return size;
+  }
+
+  static find(tree, value) {
+    let result = false;
+    Tree.traverse(tree, (leaf) => {
+      if (leaf.value === value) {
+        result = leaf;
+      }
+    });
+    return result;
+  }
+
+  insert(parentTree, value) {
+    let leaf = Tree.find(this, parentTree.value);
+    if (leaf) {
+      leaf.insertChild(value);
+    }
+    return leaf;
+  }
+
+  remove(value) {
+    if (this.value === value) {
+      delete this;
+    }
+    this.children.forEach((child, index) => {
+      if (child.value === value) {
+        this.children.splice(index, 1);
+      } else {
+        child.remove(value);
+      }
+    });
+  }
+
+  reorder(node1, node2) {
+    const leaf1 = Tree.find(this, node1);
+    const leaf2 = Tree.find(this, node2);
+
+    leaf1.value = node2;
+    leaf2.value = node1;
   }
 }
 
@@ -43,8 +83,11 @@ class Logger {
     this.values = [];
     this.log = this.log.bind(this);
   }
-  log(value) {
-    this.values.push(value);
+  log(tree) {
+    this.values.push(tree.value);
+  }
+  clear() {
+    this.values = [];
   }
 }
 
@@ -54,7 +97,16 @@ jamil.children[0].insertChild(2.2);
 jamil.children[0].insertChild(2.3);
 jamil.children[0].children[1].insertChild(2.21);
 jamil.children[0].children[1].insertChild(2.22);
-jamil.traverse(jamil, logger.log);
-console.log('size tree', jamil.size(jamil));
+// const jamil2_1Tree = jamil.find(jamil, )
+jamil.insert(Tree.find(jamil, 2.1), 5.6);
+Tree.traverse(jamil, logger.log);
+console.log('((((', logger.values.slice());
+logger.clear();
+jamil.reorder(1, 3);
+Tree.traverse(jamil, logger.log);
+console.log('))))', logger.values.slice());
+// console.log('size tree', jamil.size(jamil));
+// console.log('log tree', logger.values);
+console.log('final tree', jamil);
 
 export default Tree;

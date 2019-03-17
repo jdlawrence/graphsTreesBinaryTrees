@@ -2,6 +2,8 @@ import Tree from './trees';
 import Logger from './logger';
 
 let tree;
+let logger;
+
 beforeEach(() => {
   tree = new Tree(1);
 });
@@ -40,6 +42,8 @@ describe('the traverse function', () => {
     tree.children[0].insertChild(2.3);
     tree.children[0].children[1].insertChild(2.21);
     tree.children[0].children[1].insertChild(2.22);
+
+    logger = new Logger();
   });
 
   afterEach(() => {
@@ -47,12 +51,11 @@ describe('the traverse function', () => {
   });
 
   test('should be a function', () => {
-    expect(typeof tree.traverse).toBe('function');
+    expect(typeof Tree.traverse).toBe('function');
   });
 
   test('should visit every node', () => {
-    const logger = new Logger();
-    tree.traverse(tree, logger.log);
+    Tree.traverse(tree, logger.log);
     expect(logger.values.length).toBe(9);
   });
 });
@@ -95,15 +98,152 @@ describe('the size function', () => {
   });
 
   test('should be a function', () => {
-    expect(typeof tree.contains).toBe('function');
+    expect(typeof Tree.size).toBe('function');
   });
 
   test('should return a number equaling the size of the tree', () => {
-    expect(typeof tree.size(tree)).toBe('number');
-    expect(tree.size(tree)).toBe(1);
+    expect(typeof Tree.size(tree)).toBe('number');
+    expect(Tree.size(tree)).toBe(1);
     tree.insertChild(2);
-    expect(tree.size(tree)).toBe(2);
+    expect(Tree.size(tree)).toBe(2);
     tree.children[0].insertChild(3);
-    expect(tree.size(tree)).toBe(3);
+    expect(Tree.size(tree)).toBe(3);
   });
 });
+
+describe('the find function', () => {
+  beforeEach(() => {
+    tree.insertChild(2);
+    tree.insertChild(3);
+    tree.insertChild(4);
+    tree.children[0].insertChild(2.1);
+    tree.children[0].insertChild(2.2);
+    tree.children[0].insertChild(2.3);
+    tree.children[0].children[1].insertChild(2.21);
+    tree.children[0].children[1].insertChild(2.22);
+  });
+
+  afterEach(() => {
+    tree = new Tree(1);
+  });
+
+  test('should be a function', () => {
+    expect(typeof Tree.find).toBe('function');
+  });
+
+  test('should return the Tree containing the value', () => {
+    let result = Tree.find(tree, 2.3);
+    expect(result).toBeInstanceOf(Tree);
+    expect(result.value).toBe(2.3);
+  });
+
+  test('should return false if the tree does not contain the value', () => {
+    let result = Tree.find(tree, 9);
+    expect(result).toBe(false);
+  });
+});
+
+describe('the insert function', () => {
+  beforeEach(() => {
+    tree.insertChild(2);
+    tree.insertChild(3);
+    tree.insertChild(4);
+    tree.children[0].insertChild(2.1);
+    tree.children[0].insertChild(2.2);
+    tree.children[0].insertChild(2.3);
+    tree.children[0].children[1].insertChild(2.21);
+    tree.children[0].children[1].insertChild(2.22);
+  });
+
+  afterEach(() => {
+    tree = new Tree(1);
+  });
+
+  test('should be a function', () => {
+    expect(typeof tree.insert).toBe('function');
+  });
+
+
+  test('should insert a new Tree as child of the given Tree', () => {
+    let result = Tree.find(tree, 2.3);
+    expect(result.contains(8)).toBe(false);
+    tree.insert(result, 8);
+    expect(result.contains(8)).toBe(true);
+  });
+});
+
+describe('the remove function', () => {
+  beforeEach(() => {
+    tree.insertChild(2);
+    tree.insertChild(3);
+    tree.insertChild(4);
+    tree.children[0].insertChild(2.1);
+    tree.children[0].insertChild(2.2);
+    tree.children[0].insertChild(2.3);
+    tree.children[0].children[1].insertChild(2.21);
+    tree.children[0].children[1].insertChild(2.22);
+  });
+
+  afterEach(() => {
+    tree = new Tree(1);
+  });
+
+  test('should be a function', () => {
+    expect(typeof tree.remove).toBe('function');
+  });
+
+
+  test('should remove the node from the tree it is called on', () => {
+    tree.remove(2.3);
+    expect(tree.contains(2.3)).toBe(false);
+  });
+});
+
+describe('the reorder function', () => {
+  beforeEach(() => {
+    tree.insertChild(2);
+    tree.insertChild(3);
+    tree.insertChild(4);
+    tree.children[0].insertChild(2.1);
+    tree.children[0].insertChild(2.2);
+    tree.children[0].insertChild(2.3);
+    tree.children[0].children[1].insertChild(2.21);
+    tree.children[0].children[1].insertChild(2.22);
+
+    logger = new Logger();
+  });
+
+  afterEach(() => {
+    tree = new Tree(1);
+  });
+
+  test('should be a function', () => {
+    expect(typeof tree.reorder).toBe('function');
+  });
+
+
+  test('should swap two given nodes in the tree', () => {
+    Tree.traverse(tree, logger.log);
+    const initialIndex1 = logger.values.indexOf(2.21);
+    const initialIndex2 = logger.values.indexOf(2.3);
+    tree.reorder(2.21, 2.3);
+    Tree.traverse(tree, logger.log);
+    const reorderedIndex1 = logger.values.indexOf(2.21);
+    const reorderedIndex2 = logger.values.indexOf(2.3);
+    expect(reorderedIndex2).toBe(initialIndex1);
+    expect(reorderedIndex1).toBe(initialIndex2);
+  });
+
+  test('the reorder function should not the change the order of nodes not be reordered', () => {
+    Tree.traverse(tree, logger.log);
+    const initialIndex1 = logger.values.indexOf(2.21);
+    const initialIndex2 = logger.values.indexOf(2.3);
+    tree.reorder(2.3, 4);
+    Tree.traverse(tree, logger.log);
+    const indexAfterReorder1 = logger.values.indexOf(2.21);
+    const indexAfterReorder2 = logger.values.indexOf(2.3);
+    expect(initialIndex1).toBe(indexAfterReorder1);
+    expect(initialIndex2).toBe(indexAfterReorder2);
+  });
+});
+
