@@ -106,7 +106,6 @@ describe('the preOrderTraversal function', () => {
 
     // extract the values out of the logger
     const values = logger.values.map(currentBinaryTree => currentBinaryTree.value);
-    console.log('preOrder', values);
     expect(values).toEqual([1, 2, 4, 5, 3, 6, 7]);
   });
 });
@@ -137,7 +136,6 @@ describe('the postOrderTraversal function', () => {
 
     // extract the values out of the logger
     const values = logger.values.map(currentBinaryTree => currentBinaryTree.value);
-    console.log('postOrder', values);
 
     expect(values).toEqual([4, 5, 2, 6, 7, 3, 1]);
   });

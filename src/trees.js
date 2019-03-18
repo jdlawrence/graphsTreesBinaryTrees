@@ -74,27 +74,4 @@ class Tree {
   }
 }
 
-const jamil = new Tree(1);
-jamil.insertChild(2);
-jamil.insertChild(3);
-jamil.insertChild(4);
-
-const logger = new Logger();
-jamil.children[0].insertChild(2.1);
-jamil.children[0].insertChild(2.2);
-jamil.children[0].insertChild(2.3);
-jamil.children[0].children[1].insertChild(2.21);
-jamil.children[0].children[1].insertChild(2.22);
-// const jamil2_1Tree = jamil.find(jamil, )
-jamil.insert(Tree.find(jamil, 2.1), 5.6);
-Tree.traverse(jamil, logger.log);
-console.log('((((', logger.values.slice());
-logger.clear();
-jamil.reorder(1, 3);
-Tree.traverse(jamil, logger.log);
-console.log('))))', logger.values.slice());
-// console.log('size tree', jamil.size(jamil));
-// console.log('log tree', logger.values);
-console.log('final tree', jamil);
-
 export default Tree;

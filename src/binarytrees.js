@@ -71,33 +71,4 @@ class BinaryTree {
   }
 }
 
-const jamil = new BinaryTree(10);
-jamil.left = new BinaryTree(11);
-jamil.right = new BinaryTree(9);
-jamil.left.left = new BinaryTree(7);
-jamil.right.left = new BinaryTree(15);
-// jamil.right.right = new BinaryTree(8);
-
-const akeem = new BinaryTree(1);
-akeem.left = new BinaryTree(2);
-akeem.right = new BinaryTree(3);
-akeem.insertChild(4);
-jamil.insertChild(12);
-jamil.insertChild(132);
-
-const kyle = new BinaryTree(1);
-kyle.insertChild(2);
-kyle.insertChild(3);
-kyle.insertChild(4);
-kyle.insertChild(5);
-kyle.insertChild(6);
-kyle.insertChild(7);
-
-const logger = new Logger();
-
-console.log('Akeem', akeem);
-console.log('jamil', jamil);
-console.log('kyle', kyle);
-kyle.preOrderTraversal(logger.log);
-
 export default BinaryTree;
