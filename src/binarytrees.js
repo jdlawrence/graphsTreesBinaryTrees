@@ -1,5 +1,3 @@
-import Logger from './logger';
-
 class BinaryTree {
   constructor(value) {
     this.value = value;

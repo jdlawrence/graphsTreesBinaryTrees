@@ -1,4 +1,3 @@
-import Logger from './logger';
 class Tree {
   constructor(value) {
     this.value = value;

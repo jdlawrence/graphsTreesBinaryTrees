@@ -1,4 +1,4 @@
-import BinaryTree from './binarytrees';
+import BinaryTree from '../src/binarytrees';
 import Logger from './logger';
 
 let binaryTree;
