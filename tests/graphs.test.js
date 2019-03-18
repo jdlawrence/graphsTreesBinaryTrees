@@ -12,6 +12,10 @@ test('it should be a function', () => {
   expect(typeof Graph).toBe('function');
 });
 
+test('should have an "adjList" property', () => {
+  expect(graph.hasOwnProperty('adjList')).toBe(true);
+});
+
 describe('the addNode function', () => {
   test('should be a function', () => {
     expect(typeof graph.addNode).toBe('function');

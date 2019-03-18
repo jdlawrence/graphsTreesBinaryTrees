@@ -12,10 +12,12 @@ test('it should be a function', () => {
   expect(typeof BinaryTree).toBe('function');
 });
 
-describe('the insertChild function', () => {
-  beforeEach(() => {
-  });
+test('should have a left and right property', () => {
+  expect(binaryTree.hasOwnProperty('left')).toBe(true);
+  expect(binaryTree.hasOwnProperty('right')).toBe(true);
+});
 
+describe('the insertChild function', () => {
   afterEach(() => {
     binaryTree.left = null;
     binaryTree.right = null;
