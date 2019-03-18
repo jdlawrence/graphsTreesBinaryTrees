@@ -7,6 +7,9 @@
     log(value) {
       this.values.push(value);
     }
+    clear() {
+      this.values = [];
+    }
   }
 
   export default Logger;
