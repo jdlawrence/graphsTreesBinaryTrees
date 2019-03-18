@@ -1,2 +1,2 @@
-# graphExercises
-My graphs exploration
+# graphs, trees, and binary trees Exercises
+An exploration of several data structures
