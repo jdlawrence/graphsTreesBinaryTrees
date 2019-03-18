@@ -1,3 +1,4 @@
+import Logger from './logger';
 class Tree {
   constructor(value) {
     this.value = value;
@@ -77,19 +78,6 @@ const jamil = new Tree(1);
 jamil.insertChild(2);
 jamil.insertChild(3);
 jamil.insertChild(4);
-
-class Logger {
-  constructor() {
-    this.values = [];
-    this.log = this.log.bind(this);
-  }
-  log(tree) {
-    this.values.push(tree.value);
-  }
-  clear() {
-    this.values = [];
-  }
-}
 
 const logger = new Logger();
 jamil.children[0].insertChild(2.1);
