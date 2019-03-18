@@ -131,7 +131,7 @@ describe('the find function', () => {
     expect(typeof Tree.find).toBe('function');
   });
 
-  test('should return the Tree containing the value', () => {
+  test('should return the tree containing the value', () => {
     let result = Tree.find(tree, 2.3);
     expect(result).toBeInstanceOf(Tree);
     expect(result.value).toBe(2.3);
@@ -234,7 +234,7 @@ describe('the reorder function', () => {
     expect(reorderedIndex1).toBe(initialIndex2);
   });
 
-  test('the reorder function should not the change the order of nodes not be reordered', () => {
+  test('should not the change the order of nodes not being reordered', () => {
     Tree.traverse(tree, logger.log);
     const initialIndex1 = logger.values.indexOf(2.21);
     const initialIndex2 = logger.values.indexOf(2.3);
