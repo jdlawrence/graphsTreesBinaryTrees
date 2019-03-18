@@ -1,8 +1,8 @@
 {
-  "name": "graphExercises",
+  "name": "graphTreesBinaryTrees",
   "version": "1.0.0",
   "main": "graphs.js",
-  "repository": "https://github.com/jdlawrence/graphExercises.git",
+  "repository": "https://github.com/jdlawrence/graphsTreesBinaryTrees.git",
   "author": "Jamil Lawrence <jamil.lawrence@gmail.com>",
   "license": "MIT",
   "dependencies": {},
