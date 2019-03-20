@@ -1,4 +1,4 @@
-import Tree from '../src/trees';
+import Tree from '../solutions/trees.solutions';
 import Logger from './logger';
 
 let tree;

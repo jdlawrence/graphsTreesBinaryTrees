@@ -70,33 +70,6 @@ describe('the contains function', () => {
   });
 });
 
-describe('the inOrderTraversal function', () => {
-  beforeEach(() => {
-    binarySearchTree = new BinarySearchTree(4);
-    binarySearchTree.insert(2);
-    binarySearchTree.insert(6);
-    binarySearchTree.insert(1);
-    binarySearchTree.insert(3);
-    binarySearchTree.insert(5);
-    binarySearchTree.insert(7);
-
-    logger = new Logger();
-  });
-
-  test('should be a function', () => {
-    expect(typeof binarySearchTree.inOrderTraversal).toBe('function');
-  });
-
-  test('should visit all nodes in an in-order (left, root, right) pattern', () => {
-    binarySearchTree.inOrderTraversal(logger.log);
-
-    // extract the values out of the logger
-    const values = logger.values.map(currentBinaryTree => currentBinaryTree.value);
-
-    expect(values).toEqual([1, 2, 3, 4, 5, 6, 7]);
-  });
-});
-
 describe('the delete function', () => {
   test('should be a function', () => {
     expect(typeof binarySearchTree.delete).toBe('function');
@@ -137,6 +110,33 @@ describe('the delete function', () => {
     expect(binarySearchTree.left.value).toBe(0.5);
     expect(binarySearchTree.left.right.value).toBe(0.5);
     expect(binarySearchTree.right.value).toBe(3);
+  });
+});
+
+describe('the inOrderTraversal function', () => {
+  beforeEach(() => {
+    binarySearchTree = new BinarySearchTree(4);
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(1);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(5);
+    binarySearchTree.insert(7);
+
+    logger = new Logger();
+  });
+
+  test('should be a function', () => {
+    expect(typeof binarySearchTree.inOrderTraversal).toBe('function');
+  });
+
+  test('should visit all nodes in an in-order (left, root, right) pattern', () => {
+    binarySearchTree.inOrderTraversal(logger.log);
+
+    // extract the values out of the logger
+    const values = logger.values.map(currentBinaryTree => currentBinaryTree.value);
+
+    expect(values).toEqual([1, 2, 3, 4, 5, 6, 7]);
   });
 });
 
