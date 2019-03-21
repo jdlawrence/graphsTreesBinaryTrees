@@ -38,7 +38,7 @@ class BinarySearchTree {
       }
     }
 
-    insertHelper.bind(this, this.root, value)();
+    return insertHelper.call(this, this.root, value);
   }
 
   contains(value) {
@@ -57,13 +57,37 @@ class BinarySearchTree {
       return false;
     }
 
-    return containsHelper.bind(this, this.root, value)();
+    return containsHelper.call(this, this.root, value);
   }
 
-  delete(value) {
-    function deleteHelper(node, value) {
+  min(node = null) {
+    if (node === null) {
+      return;
+    }
+
+    if (node.left === null) {
+      return node;
+    } else {
+      return this.min(node.left);
+    }
+  }
+
+  max(node) {
+    if (node === null) {
+      return null;
+    }
+
+    if (node.right === null) {
+      return node;
+    } else {
+      return this.max(node.right);
+    }
+  }
+
+  remove(value) {
+    function removeHelper(node, value) {
       if (node.value === value) {
-        // No children, delete the current node
+        // No children, remove the current node
         if (node.left === null && node.right === null) {
           node = null;
           return node;
@@ -80,15 +104,23 @@ class BinarySearchTree {
           return node;
         }
 
+        // two children
+        let successor = this.min(node.right);
+        let temp = node.value;
+        node.value = successor.value;
+        successor.value = temp;
+        node.right = removeHelper(node.right, temp);
+        return node;
+
       } else if (value < node.value && node.left !== null) {
-        node.left = deleteHelper(node.left, value);
+        node.left = removeHelper.call(this, node.left, value);
       } else if (value > node.value && node.right !== null) {
-        node.right = deleteHelper(node.right, value);
+        node.right = removeHelper.call(this, node.right, value);
       }
       return node;
     }
 
-    this.root = deleteHelper.bind(this, this.root, value)();
+    this.root = removeHelper.call(this, this.root, value);
   }
 
   // left, root, right
@@ -97,13 +129,13 @@ class BinarySearchTree {
       return false;
     }
 
-    if (node.left) {
+    if (node.left !== null) {
       this.inOrderTraversal(node.left, func);
     }
 
     func(node);
 
-    if (node.right) {
+    if (node.right !== null) {
       this.inOrderTraversal(node.right, func);
     }
   }
@@ -116,27 +148,27 @@ class BinarySearchTree {
 
     func(node);
 
-    if (node.left) {
-      node.left.preOrderTraversal(func);
+    if (node.left !== null) {
+      this.preOrderTraversal(node.left, func);
     }
 
-    if (node.right) {
-      node.right.preOrderTraversal(func);
+    if (node.right !== null) {
+      this.preOrderTraversal(node.right, func);
     }
   }
 
   // left, right, root
-  postOrderTraversal(func = console.log) {
+  postOrderTraversal(node, func = console.log) {
     if (node === null) {
       return false;
     }
 
-    if (node.left) {
-      node.left.postOrderTraversal(func);
+    if (node.left !== null) {
+      this.postOrderTraversal(node.left, func);
     }
 
-    if (node.right) {
-      node.right.postOrderTraversal(func);
+    if (node.right !== null) {
+      this.postOrderTraversal(node.right, func);
     }
 
     func(node);
@@ -148,10 +180,10 @@ dummy = new BinarySearchTree();
 dummy.insert(4);
 dummy.insert(2);
 dummy.insert(6);
-// dummy.insert(1);
-// dummy.insert(3);
-// dummy.insert(5);
-// dummy.insert(7);
+dummy.insert(1);
+dummy.insert(3);
+dummy.insert(5);
+dummy.insert(7);
 console.log('4', dummy.contains(4));
 console.log('2', dummy.contains(2));
 console.log('1', dummy.contains(1));
@@ -159,13 +191,16 @@ console.log('3', dummy.contains(3));
 console.log('6', dummy.contains(6));
 console.log('8', dummy.contains(8));
 
+console.log('min', dummy.min(dummy.root.right));
+console.log('max', dummy.max(dummy.root.right));
+
 let logger = new Logger();
 
 dummy.inOrderTraversal(dummy.root, logger.log);
-console.log('before delete', logger.values.map(node => node.value));
+console.log('before remove', logger.values.map(node => node.value));
 logger.clear();
-dummy.delete(4);
+dummy.remove(1);
 dummy.inOrderTraversal(dummy.root, logger.log);
-console.log('after delete', logger.values.map(node => node.value));
+console.log('after remove', logger.values.map(node => node.value));
 
-export default BinarySearchTree;
+export { BinarySearchTree, Node };
