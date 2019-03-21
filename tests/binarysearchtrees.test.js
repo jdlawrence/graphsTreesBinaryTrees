@@ -1,4 +1,4 @@
-import { BinarySearchTree, Node } from '../solutions/binarysearchtrees.solutions';
+import { BinarySearchTree, Node } from '../src/binarysearchtrees';
 import Logger from './logger';
 
 let binarySearchTree;

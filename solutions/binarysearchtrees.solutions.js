@@ -1,5 +1,3 @@
-import Logger from '../tests/logger';
-
 class Node {
   constructor(value) {
     this.value = value;
@@ -174,33 +172,5 @@ class BinarySearchTree {
     func(node);
   }
 }
-
-let dummy;
-dummy = new BinarySearchTree();
-dummy.insert(4);
-dummy.insert(2);
-dummy.insert(6);
-dummy.insert(1);
-dummy.insert(3);
-dummy.insert(5);
-dummy.insert(7);
-console.log('4', dummy.contains(4));
-console.log('2', dummy.contains(2));
-console.log('1', dummy.contains(1));
-console.log('3', dummy.contains(3));
-console.log('6', dummy.contains(6));
-console.log('8', dummy.contains(8));
-
-console.log('min', dummy.min(dummy.root.right));
-console.log('max', dummy.max(dummy.root.right));
-
-let logger = new Logger();
-
-dummy.inOrderTraversal(dummy.root, logger.log);
-console.log('before remove', logger.values.map(node => node.value));
-logger.clear();
-dummy.remove(1);
-dummy.inOrderTraversal(dummy.root, logger.log);
-console.log('after remove', logger.values.map(node => node.value));
 
 export { BinarySearchTree, Node };

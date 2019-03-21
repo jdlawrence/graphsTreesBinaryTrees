@@ -1,4 +1,4 @@
-import Graph from '../solutions/graphs.solutions';
+import Graph from '../src/graphs';
 import Logger from './logger';
 
 let graph;
